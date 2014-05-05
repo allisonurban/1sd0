@@ -1,28 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<table>
-	<tr valign="top">
-		<td><img src="{{user.avatar(128)}}" /></td>
-		<td>
-			<h1>User: {{user.username}}!</h1>
-			{% if user.about %}<p>{{user.about}}</p>{% endif %}
-			{% if user.last_login %}<p>Last login: {{momentjs(user.last_login).calendar()}}</p>{% endif %}
-		</td>
-		{% if user.id == g.user.id %}<p><a href="{{ url_for('edit_profile') }}">Edit Profile</a></p>{% endif %}
-	</tr>
-</table>
-<hr>
-{% for sentence in sentences.items %}
-	{% include '/shared/_sentence.html' %}
-{% endfor %}
+{% include '/shared/_app-header.html' %}
+<section class="line content">
+	<h2 class="line">{{user.username}}</h2>
+	{% if user.about %}<p>{{user.about}}</p>{% endif %}
+	{% if user.id == g.user.id %}<p><a href="{{ url_for('edit_profile') }}">Edit Profile</a></p>{% endif %}
+</section>
+<section class="line content">
+	{% if sentences.items %}
+		{% for sentence in sentences.items %}
+			{% include '/shared/_sentence.html' %}
+		{% endfor %}
 
-<nav class="line more-sentences">
-{% if sentences.has_prev %}
-<a class="newer" href="{{ url_for('user', username = user.username, page = sentences.prev_num) }}"><< Newer</a>
-{% endif %}
+		<nav class="line more-sentences">
+			{% if sentences.has_prev %}
+			<a class="newer" href="{{ url_for('user', username = user.username, page = sentences.prev_num) }}">&lt;&lt; Newer</a>
+			{% endif %}
 
-{% if sentences.has_next %}
-<a class="older" href="{{ url_for('user', username = user.username, page = sentences.next_num) }}">Older >></a>
-{% endif %}
+			{% if sentences.has_next %}
+			<a class="older" href="{{ url_for('user', username = user.username, page = sentences.next_num) }}">Older &gt;&gt;</a>
+			{% endif %}
+		</nav>
+	{% else %}
+		{% if user.id == g.user.id %}
+			<p>You haven't written any sentence yet.</p>
+		{% endif %}
+	{% endif %}
+</section>
 
 {% endblock %}
