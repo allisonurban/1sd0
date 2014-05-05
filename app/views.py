@@ -29,6 +29,7 @@ def before_request():
 		db.session.commit()
 
 @app.route('/')
+@app.route('/feed')
 @app.route('/feed/<int:page>')
 # @login_required
 def index(page = 1):
