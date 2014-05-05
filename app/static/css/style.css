@@ -305,32 +305,33 @@ fieldset .error {
 .blockquote blockquote :after {
     content: '\201D'; }
     
-.blockquote blockquote cite {
+.blockquote cite {
     font-size: 18px; }
 
-.blockquote blockquote cite:before {
+.blockquote cite:before {
     content: "\2014";
     padding-right: 5px; }
 
 .sentence {
     border-top: 2px solid #2e2f29;
-    border-bottom: 1px solid #2e2f29;
     margin: 15px 0 30px 0;
     padding: 15px 0;
     border: none;
     padding-top: 0;
-    margin: 15px 0;
     font-weight: 400;
     display: inline-block;
     vertical-align:text-bottom; }
+    
+.sentence.single {
+    border-bottom: 1px solid #2e2f29 !important; }
 
 .sentence blockquote {
     font-family: "alize", Georgia, serif; 
     width: 100%;
     border-top: 2px solid #2e2f29;
     border-bottom: none;
-    margin: 10px 0 30px 0;
-    padding: 15px 0;
+    margin: 15px 0 0 0;
+    padding: 30px 0 15px 0;
     line-height: 1em; }
 
 .sentence blockquote:before {
@@ -338,6 +339,13 @@ fieldset .error {
 
 .sentence blockquote:after {
     content: '\201D'; }
+
+.sentence cite {
+    font-size: 18px; }
+
+.sentence cite:before {
+    content: "\2014";
+    padding-right: 5px; }
 
 .sentence ul.metadata {
     list-style: none; }

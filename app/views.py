@@ -59,8 +59,8 @@ def write():
 		form = form,
 		today = datetime.now())
 
-@app.route('/user/<username>')
-@app.route('/user/<username>/<int:page>')
+@app.route('/writer/<username>')
+@app.route('/writer/<username>/<int:page>')
 @login_required
 def user(username, page = 1):
 	user = User.query.filter_by(username = username).first()

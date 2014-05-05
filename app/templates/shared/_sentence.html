@@ -1,4 +1,8 @@
+{% if request.path.startswith('/sentence/') %}
+<div class="line sentence single">
+{% else %}
 <div class="line sentence">
+{% endif %}
     <ul class="line metadata">
         <li class="date l">
             {% if request.path.startswith('/sentence/') %}
@@ -12,5 +16,8 @@
         <li class="words r">{{ helpers(sentence.body).wordCount() }}</li>
     </ul>
     <blockquote class="h1">{{ sentence.body|safe }}</blockquote>
+    {% if sentence.author.id != g.user.id %}
+        <cite>{{ sentence.author.username }}</cite>
+    {% endif %}
 </div>
 <!-- momentjs(sentence.published_date).fromNow() -->
