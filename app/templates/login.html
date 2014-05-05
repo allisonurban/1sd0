@@ -12,39 +12,42 @@ function set_openid(openid, pr) {
 	form.elements['openid'].value = openid
 }
 </script>
-
-<header class="hero band">
-    <div class="txtgroup">
-        <h1 class="headline">1 Sentence Daily</h1>
-    </div>
-</header>
+{% include '/shared/_app-header.html' %}
 <section class="line content">
-	<h2 class="line l">Log In</h2>
+	<h2 class="line l">
+		{% if request.path.startswith('/login') %}
+			Log In
+		{% else %}
+			Sign Up
+		{% endif %}
+	</h2>
 	<form action="" method="post" name="login" class="login">
 		{{form.hidden_tag()}}
-		<div class="line">
-			<label>Enter your OpenId</label>
-			{{form.openid()}}
-		</div>
-		<div class="line">
-			{% for error in form.errors.openid %}
-			<span style="color:Red">[{{error}}]</span>
-			{% endfor %}
-		</div>
-		<div class="line">
-			<label>Or select an provider</label>
-			|{% for pr in providers %}
-			<a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
-			{% endfor %}
-		</div>
-		<div class="line">
-			<label>{{form.remember_me}} Remember me</label>
-		</div>
-		<div class="line">
-			<div class="txtblock l">
-			<input class="btn btn-block btn-large" type="submit" value="Sign In">
+		<fieldset class="line">
+			<label>Choose an OpenID provider:</label>
+			<ul class="openid-links">
+			{% for pr in providers %}
+				<div class="box">
+				<li><a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a></li>
 			</div>
-		</div>
+			{% endfor %}
+			</ul>
+		</fieldset>
+		<fieldset class="line">
+			<label>Or enter your OpenId:</label>
+			{{form.openid()}}
+			{% for error in form.errors.openid %}
+			<p class="error">{{error}}</p>
+			{% endfor %}
+		</fieldset>
+		<fieldset class="line">
+			<label>{{form.remember_me}} Remember me</label>
+		</fieldset>
+		<fieldset class="line">
+			<div class="txtblock l">
+			<input class="btn btn-block btn-large" type="submit" value="Submit">
+			</div>
+		</fieldset>
 	</form>
 </section>
 {% endblock %}

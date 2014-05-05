@@ -98,6 +98,7 @@ def edit_profile():
 		title = 'Edit Profile',
 		form = form)
 
+@app.route('/signup', methods = ['GET', 'POST'])
 @app.route('/login', methods = ['GET', 'POST'])
 @oid.loginhandler
 def login():
@@ -136,4 +137,4 @@ def after_login(resp):
 def logout():
     logout_user()
     flash('You have been logged out. See you tomorrow!')
-    return redirect(url_for('index'))
+    return redirect('/')

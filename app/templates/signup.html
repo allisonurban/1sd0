@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript">
+function set_openid(openid, pr) {
+    u = openid.search('<username>')
+    if (u != -1) {
+        // openid requires username
+        user = prompt('Enter your ' + pr + ' username:')
+        openid = openid.substr(0,u) + user
+    }
+    form = document.forms['login'];
+    form.elements['openid'].value = openid
+}
+</script>
+{% include '/shared/_app-header.html' %}
+<section class="line content">
+    <h2 class="line l">
+        Sign Up
+    </h2>
+    <form action="" method="post" name="login" class="login">
+        {{form.hidden_tag()}}
+        <fieldset class="line">
+            <label>Choose an OpenID provider:</label>
+            <ul class="openid-links">
+            {% for pr in providers %}
+                <div class="box">
+                <li><a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a></li>
+            </div>
+            {% endfor %}
+            </ul>
+        </fieldset>
+        <fieldset class="line">
+            <label>Or enter your OpenId:</label>
+            {{form.openid()}}
+            {% for error in form.errors.openid %}
+            <p class="error">{{error}}</p>
+            {% endfor %}
+        </fieldset>
+        <fieldset class="line">
+            <label>{{form.remember_me}} Remember me</label>
+        </fieldset>
+        <fieldset class="line">
+            <div class="txtblock l">
+            <input class="btn btn-block btn-large" type="submit" value="Create My Account">
+            </div>
+        </fieldset>
+    </form>
+</section>
+{% endblock %}

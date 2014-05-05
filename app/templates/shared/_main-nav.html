@@ -1,12 +1,18 @@
 <nav class="main-nav line content">
     <ul>
+        <li><a href="{{ url_for('index') }}"></a></li>
         {% if g.user.is_authenticated() %}
             <li><a href="{{ url_for('write') }}">Write</a></li>
             <li><a href="{{ url_for('user', username = g.user.username) }}">Profile</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         {% else %}
+            {% if not request.path.startswith('/login') %}
             <li><a href="{{ url_for('login') }}">Log In</a></li>
-            <li><a href="">Sign Up</a></li>
+            {% endif %}
+            {% if not request.path.startswith('/signup') %}
+            <li><a href="/signup">Sign Up</a></li>
+            {% endif %}
         {% endif %}
     </ul>
 </nav>
+

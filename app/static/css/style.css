@@ -374,6 +374,16 @@ nav.more-sentences a.newer {
 nav.more-sentences a.older {
     float: right; }
 
+.openid-links .box {
+    box-sizing: border-box;
+    float: left;
+    width: 33.3333%; }
+
+.openid-links .box li {
+    margin-left:30px; }
+
+
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width:600px){
