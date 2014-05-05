@@ -1,0 +1,11 @@
+<nav class="main-nav line content">
+    <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        {% if g.user.is_authenticated() %}
+            <li><a href="{{ url_for('user', username = g.user.username) }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Log In</a></li>
+        {% endif %}
+    </ul>
+</nav>

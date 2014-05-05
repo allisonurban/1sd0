@@ -1,0 +1,16 @@
+<div class="line sentence">
+    <ul class="line metadata">
+        <li class="date l">
+            {% if request.path.startswith('/sentence/') %}
+                 {{ momentjs(sentence.published_date).format('MMMM Do YYYY') }}
+            {% else %}
+                <a href="{{ url_for('sentence', id = sentence.id) }}">
+                    {{ momentjs(sentence.published_date).format('MMMM Do YYYY') }}
+                </a>
+            {% endif %}
+        </li>
+        <li class="words r">{{ helpers(sentence.body).wordCount() }}</li>
+    </ul>
+    <blockquote class="h1">{{ sentence.body|safe }}</blockquote>
+</div>
+<!-- momentjs(sentence.published_date).fromNow() -->

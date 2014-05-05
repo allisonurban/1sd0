@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{% if title %}{{title}} | {% endif %}1sd</title>
+		<script type="text/javascript" src="//use.typekit.net/gky0pso.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<script src="/static/js/moment.min.js"></script>
+		<link rel=stylesheet type=text/css href="/static/css/style.css" />
+	</head>
+	<body>
+		{% include '/shared/_main-nav.html' %}
+		<section class="line content">
+		{% for message in get_flashed_messages() %}
+			<div class=flash>{{message}}</div>
+		{% endfor %}
+		</section>
+		<section class="line content">
+			{% block content %}
+			{% endblock %}
+		</section>
+	</body>
+</html>

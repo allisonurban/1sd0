@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="hero band">
+    <div class="txtgroup">
+        <h1 class="headline">1 Sentence Daily</h1>
+    </div>
+</header>
+<section class="line">
+    <h2>{{ momentjs(today).format('MMMM Do YYYY') }}</h2>
+    <form action="" method="post" name="sentence" class="write">
+        {{form.hidden_tag()}}
+        <div class="line">
+        {{ form.sentence(rows=4) }}
+        </div>
+        <div class="line">
+            {% for error in form.errors.sentence %}
+                <span style="color:red">[{{error}}]</span><br/>
+            {% endfor %}
+        </div>
+        <div class="line">
+            <div class="txtblock l">
+                <input class="btn btn-block btn-large" type="submit" value="Submit">
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
