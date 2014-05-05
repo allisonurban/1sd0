@@ -28,10 +28,7 @@ def before_request():
 		db.session.add(g.user)
 		db.session.commit()
 
-@app.route('/', methods = ['GET', 'POST'])
-@app.route('/index', methods = ['GET', 'POST'])
-@app.route('/index/<int:page>')
-@app.route('/feed')
+@app.route('/')
 @app.route('/feed/<int:page>')
 # @login_required
 def index(page = 1):
@@ -136,4 +133,5 @@ def after_login(resp):
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('You have been logged out. See you tomorrow!')
     return redirect(url_for('index'))

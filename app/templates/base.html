@@ -11,7 +11,7 @@
 		{% include '/shared/_main-nav.html' %}
 		<section class="line content">
 		{% for message in get_flashed_messages() %}
-			<div class=flash>{{message}}</div>
+			<div class="flash"><span>{{message}}</span></div>
 		{% endfor %}
 		</section>
 		<section class="line content">
