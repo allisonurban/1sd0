@@ -3,26 +3,32 @@
 {% include '/shared/_app-header.html' %}
 <section class="line content">
     <p class="banner-message">
-        You last wrote {{ momentjs(last_wrote).fromNow() }} ago.
-        {% if go_write %}
-            &nbsp;<a href="{{ url_for('write') }}" class="fancy h4">It's time to write.</a>
+        {% if sentences.items %}
+            You last wrote {{ momentjs(g.user.sentences.first().published_date).fromNow() }} ago.
+            {% if helpers(g.user.sentences.first()).userShouldWrite() %}
+                &nbsp;<a href="{{ url_for('write') }}" class="fancy h4">It's time to write.</a>
+            {% else %}
+                Well done!
+            {% endif %}
         {% else %}
-            Well done!
+            Your page is blank. <a href="{{ url_for('write') }}" class="fancy h4">It's time to write.</a>
         {% endif %}
     </p>
 </section>
 <section class="line content">
-    {% for sentence in sentences.items %}
-        {% include '/shared/_sentence.html' %}
-    {% endfor %}
-    <nav class="line more-sentences">
-    {% if sentences.has_prev %}
-    <a class="newer" href="{{ url_for('index', page = sentences.prev_num) }}">&lt;&lt; Newer</a>
-    {% endif %}
+    {% if sentences.items %}
+        {% for sentence in sentences.items %}
+            {% include '/shared/_sentence.html' %}
+        {% endfor %}
+        <nav class="line more-sentences">
+        {% if sentences.has_prev %}
+        <a class="newer" href="{{ url_for('index', page = sentences.prev_num) }}">&lt;&lt; Newer</a>
+        {% endif %}
 
-    {% if sentences.has_next %}
-    <a class="older" href="{{ url_for('index', page = sentences.next_num) }}">Older &gt;&gt;</a>
+        {% if sentences.has_next %}
+        <a class="older" href="{{ url_for('index', page = sentences.next_num) }}">Older &gt;&gt;</a>
+        {% endif %}
+        </nav>
     {% endif %}
-    </nav>
 </section>
 {% endblock %}

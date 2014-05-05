@@ -23,7 +23,9 @@
 		</nav>
 	{% else %}
 		{% if user.id == g.user.id %}
-			<p>You haven't written any sentence yet.</p>
+			<p>Your page is blank. &nbsp;<a href="{{ url_for('write') }}" class="fancy h4">It's time to write.</a></p>
+		{% else %}
+			<p>{{ user.username }} hasn't written anything yet.</p>
 		{% endif %}
 	{% endif %}
 </section>

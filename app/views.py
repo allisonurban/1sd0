@@ -35,12 +35,9 @@ def before_request():
 def index(page = 1):
 	if g.user.is_authenticated():
 		sentences = g.user.recent_sentences().paginate(page, POSTS_PER_PAGE, False)
-		last_wrote = g.user.sentences.first().published_date
 		return render_template('feed.html', 
 			title = 'Feed', 
-			sentences = sentences,
-			last_wrote = last_wrote,
-			go_write = last_wrote.date() < date.today())
+			sentences = sentences)
 	else:
 		return render_template('index.html')
 
@@ -69,6 +66,7 @@ def user(username, page = 1):
 		return redirect(url_for('index'))
 	sentences = user.sentences.paginate(page, POSTS_PER_PAGE, False)
 	return render_template('user.html',
+		title = username,
 		user = user,
 		sentences = sentences)
 
@@ -79,6 +77,7 @@ def sentence(id, page = 1):
         flash('Sentence not found.')
         return redirect(url_for('index'))
     return render_template('sentence.html',
+    	title = 'Sentences',
     	sentence = sentence)
 
 @app.route('/profile/edit', methods = ['GET', 'POST'])
@@ -95,7 +94,9 @@ def edit_profile():
 	else:
 		form.username.data = g.user.username
 		form.about.data = g.user.about
-	return render_template('edit_profile.html', form = form)
+	return render_template('edit_profile.html', 
+		title = 'Edit Profile',
+		form = form)
 
 @app.route('/login', methods = ['GET', 'POST'])
 @oid.loginhandler
@@ -107,7 +108,7 @@ def login():
 		session['remember_me'] = form.remember_me.data
 		return oid.try_login(form.openid.data, ask_for = ['nickname', 'email'])
 	return render_template('login.html',
-		title = 'Sign In',
+		title = 'Log In',
 		form = form,
 		providers = app.config['OPENID_PROVIDERS'])
 
