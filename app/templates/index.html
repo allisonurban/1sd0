@@ -1,28 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-{% include '/shared/_app-header.html' %}
+<header class="hero">
+    <div class="txtgroup">
+        <h1 class="line headline">1 Sentence Daily</h1>
+        <h2 class="line tagline">A micro journal</h2>
+    </div>
+</header>
 <section class="line content">
-    <p class="banner-message">
-        You last wrote {{ momentjs(last_wrote).fromNow() }} ago.
-        {% if go_write %}
-            &nbsp;<a href="{{ url_for('write') }}" class="fancy h4">It's time to write.</a>
-        {% else %}
-            Well done!
-        {% endif %}
-    </p>
-</section>
-<section class="line content">
-    {% for sentence in sentences.items %}
-        {% include '/shared/_sentence.html' %}
-    {% endfor %}
-    <nav class="line more-sentences">
-    {% if sentences.has_prev %}
-    <a class="newer" href="{{ url_for('index', page = sentences.prev_num) }}">&lt;&lt; Newer</a>
-    {% endif %}
-
-    {% if sentences.has_next %}
-    <a class="older" href="{{ url_for('index', page = sentences.next_num) }}">Older &gt;&gt;</a>
-    {% endif %}
-    </nav>
+    <h2 class="line">Nulla facilisi.</h2>
+    <div class="txtblock l">
+        <p>Fusce pulvinar felis erat, sed congue tortor tempor eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam in velit elementum, volutpat nulla ac, facilisis dolor. Proin ut imperdiet odio. Pellentesque sodales ligula eu diam cursus placerat. Curabitur vitae egestas nibh. Quisque id placerat dolor.</p>
+    </div>
+    <div class="txtblock r">
+        <p>Aliquam tempor lacus et interdum viverra. Aliquam sem erat, dignissim quis mollis quis, luctus sed velit. Suspendisse tristique mattis est nec dapibus. In mi lacus, commodo eget consequat a, bibendum vel justo.</p>
+        <a class="fancy h3" href="">Try it</a>
+    </div>
 </section>
 {% endblock %}

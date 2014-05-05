@@ -33,15 +33,18 @@ def before_request():
 @app.route('/index/<int:page>')
 @app.route('/feed')
 @app.route('/feed/<int:page>')
-@login_required
+# @login_required
 def index(page = 1):
-	sentences = g.user.recent_sentences().paginate(page, POSTS_PER_PAGE, False)
-	last_wrote = g.user.sentences.first().published_date
-	return render_template('index.html', 
-		title = 'Feed', 
-		sentences = sentences,
-		last_wrote = last_wrote,
-		go_write = last_wrote.date() < date.today())
+	if g.user.is_authenticated():
+		sentences = g.user.recent_sentences().paginate(page, POSTS_PER_PAGE, False)
+		last_wrote = g.user.sentences.first().published_date
+		return render_template('feed.html', 
+			title = 'Feed', 
+			sentences = sentences,
+			last_wrote = last_wrote,
+			go_write = last_wrote.date() < date.today())
+	else:
+		return render_template('index.html')
 
 @app.route('/write', methods = ['GET', 'POST'])
 @login_required
