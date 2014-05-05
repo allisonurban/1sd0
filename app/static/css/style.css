@@ -17,6 +17,17 @@ body {
     box-sizing: border-box;
     vertical-align: baseline; }
 
+footer {
+    box-sizing: border-box;
+    padding: 15px 0;
+}
+footer ul {
+    list-style-type: none; }
+footer ul li {
+    display: inline-block;
+    padding-right: 15px;
+}
+
 .athelas { 
     font-family: "athelas", Georgia, serif; }
 .alize { 
@@ -340,7 +351,7 @@ nav.more-sentences a.older {
         padding: 5px; }
 
     .banner-message {
-        padding: 0; }
+        padding: 0 15px; }
 
     .hero {
         margin-top: 0; 
@@ -361,7 +372,8 @@ nav.more-sentences a.older {
         padding-right: 15px; }
 
     .sentence blockquote {
+        box-sizing: border-box;
         padding-left: 15px;
-        padding-right: 15px }
+        padding-right: 15px; }
 
 }
