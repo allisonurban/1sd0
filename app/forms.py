@@ -7,7 +7,7 @@ class LoginForm(Form):
     openid = TextField('openid', validators = [Required()])
     remember_me = BooleanField('remember_me', default = False)
 
-class EditForm(Form):
+class EditProfileForm(Form):
     username = TextField('username', validators = [Required()])
     about = TextAreaField('about', validators = [Length(min=0, max=140)])
 

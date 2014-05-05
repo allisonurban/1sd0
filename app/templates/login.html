@@ -1,8 +1,5 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
-
 {% block content %}
-
 <script type="text/javascript">
 function set_openid(openid, pr) {
 	u = openid.search('<username>')
@@ -16,20 +13,38 @@ function set_openid(openid, pr) {
 }
 </script>
 
-<h1>Log In</h1>
-<form action="" method="post" name="login">
-	{{form.hidden_tag()}}
-	<p>Please enter your OpenId, or select one of the providers below:<br/>
-		{{form.openid(size=80)}}<br>
-		{% for error in form.errors.openid %}
-		<span style="color:Red">[{{error}}]</span>
-		{% endfor %}
-		|{% for pr in providers %}
-		<a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
-		{% endfor %}
-	</p>
-	<p>{{form.remember_me}} Remember me</p>
-	<p><input type="submit" value="Sign In"></p>
-</form>
-
+<header class="hero band">
+    <div class="txtgroup">
+        <h1 class="headline">1 Sentence Daily</h1>
+    </div>
+</header>
+<section class="line content">
+	<h2 class="line l">Log In</h2>
+	<form action="" method="post" name="login" class="login">
+		{{form.hidden_tag()}}
+		<div class="line">
+			<label>Enter your OpenId</label>
+			{{form.openid()}}
+		</div>
+		<div class="line">
+			{% for error in form.errors.openid %}
+			<span style="color:Red">[{{error}}]</span>
+			{% endfor %}
+		</div>
+		<div class="line">
+			<label>Or select an provider</label>
+			|{% for pr in providers %}
+			<a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
+			{% endfor %}
+		</div>
+		<div class="line">
+			<label>{{form.remember_me}} Remember me</label>
+		</div>
+		<div class="line">
+			<div class="txtblock l">
+			<input class="btn btn-block btn-large" type="submit" value="Sign In">
+			</div>
+		</div>
+	</form>
+</section>
 {% endblock %}

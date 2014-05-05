@@ -8,7 +8,7 @@
 			{% if user.about %}<p>{{user.about}}</p>{% endif %}
 			{% if user.last_login %}<p>Last login: {{momentjs(user.last_login).calendar()}}</p>{% endif %}
 		</td>
-		{% if user.id == g.user.id %}<p><a href="{{ url_for('edit') }}">Edit</a></p>{% endif %}
+		{% if user.id == g.user.id %}<p><a href="{{ url_for('edit_profile') }}">Edit Profile</a></p>{% endif %}
 	</tr>
 </table>
 <hr>

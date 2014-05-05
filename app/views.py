@@ -2,7 +2,7 @@ from datetime import datetime, date
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
-from forms import LoginForm, EditForm, SentenceForm
+from forms import LoginForm, EditProfileForm, SentenceForm
 from models import User, Sentence
 from config import POSTS_PER_PAGE
 import re
@@ -80,10 +80,10 @@ def sentence(id, page = 1):
     return render_template('sentence.html',
     	sentence = sentence)
 
-@app.route('/edit', methods = ['GET', 'POST'])
+@app.route('/profile/edit', methods = ['GET', 'POST'])
 @login_required
-def edit():
-	form = EditForm(g.user.username)
+def edit_profile():
+	form = EditProfileForm(g.user.username)
 	if form.validate_on_submit():
 		g.user.username = form.username.data
 		g.user.about = form.about.data
@@ -94,7 +94,7 @@ def edit():
 	else:
 		form.username.data = g.user.username
 		form.about.data = g.user.about
-	return render_template('edit.html', form = form)
+	return render_template('edit_profile.html', form = form)
 
 @app.route('/login', methods = ['GET', 'POST'])
 @oid.loginhandler

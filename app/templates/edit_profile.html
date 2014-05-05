@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% include '/shared/_app-header.html' %}
+<section class="line content">
+	<h2 class="line l">Edit Your Profile</h2>
+	<form action="" method="post" name="edit_profile" class="edit_profile">
+		{{form.hidden_tag()}}
+		<fieldset class="line">
+			<label>Username</label>
+			{{form.username()}}
+			{% for error in form.errors.username %}
+            <p class="error">{{error}}</p>
+        {% endfor %}
+		</fieldset>
+		<fieldset class="line">
+			<label>About</label>
+			{{form.about(cols=32, rows=4)}}
+		</fieldset>
+		<fieldset class="line">
+			<div class="txtblock l">
+				<input class="btn btn-block btn-large" type="submit" value="Save">
+			</div>
+		</fieldset>
+	</form>
+{% endblock %}

@@ -115,7 +115,7 @@ input[type="url"],
 input[type="date"],
 input[type="search"],
 textarea, 
-select {
+select { 
     box-sizing: border-box;
     font-family: "athelas", Georgia, serif; 
     font-size: 16px;
@@ -128,7 +128,7 @@ select {
     width: 100%;
     max-width: 100%;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     background: #fff;
     padding-right: 5px;
     padding-left: 5px;
@@ -137,6 +137,7 @@ select {
     -o-transition: 0.25s;
     transition: 0.25s;  
 }
+
 select {
     height: 30px; }
 
@@ -145,6 +146,13 @@ label {
     color: #2e2f29;
     font-weight: 600;
     line-height: 1.618em; }
+
+fieldset {
+    margin-bottom: 15px; }
+
+fieldset .error {
+    margin-bottom: 0; }
+
 
 /* BUTTONS */
 .btn {
