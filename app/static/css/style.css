@@ -297,7 +297,8 @@ fieldset .error {
     font-size: 300%;
     font-family: "alize", Georgia, serif;
     line-height: 1em;
-    padding-bottom: 5px; }
+    padding-bottom: 5px;
+    margin: 15px 0; }
 
 .blockquote blockquote:before {
     content: '\201C'; }
@@ -321,7 +322,7 @@ fieldset .error {
     font-weight: 400;
     display: inline-block;
     vertical-align:text-bottom; }
-    
+
 .sentence.single {
     border-bottom: 1px solid #2e2f29 !important; }
 
